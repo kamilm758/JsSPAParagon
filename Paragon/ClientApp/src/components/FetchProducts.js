@@ -6,6 +6,7 @@ export class FetchProducts extends Component {
   constructor(props) {
     super(props);
     this.state = { products: [], loading: true };
+    this.addNewProduct=this.addNewProduct.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +44,7 @@ export class FetchProducts extends Component {
 
     return (
       <div>
+        <button className="btn btn-primary" onClick={this.addNewProduct}>Add new product</button>
         <h1 id="tabelLabel" >All products in storage</h1>
         <p>There you can see all products in storage</p>
         {contents}
@@ -50,9 +52,13 @@ export class FetchProducts extends Component {
     );
   }
 
-  async fetchProductsData() {
+  addNewProduct(){
+    this.props.history.push("addNewProduct");
+  }
+
+ async fetchProductsData() {
     const response = await fetch('api/Products');
-    const data = await response.json();
+    const data =await response.json();
     this.setState({ products: data, loading: false });
   }
 }
