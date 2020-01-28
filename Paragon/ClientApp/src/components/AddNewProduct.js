@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import Announcement from 'react-announcement'
 export class AddNewProduct extends Component {
     static displayName = AddNewProduct.name;
 
   constructor(props) {
     super(props);
-    this.state = { name: '', quantityOnStorage: 0, price: 0};
+    this.state = { name: '', quantityOnStorage: null, price: null};
     this.handleName=this.handleName.bind(this);
     this.handleQuantityOnStorage=this.handleQuantityOnStorage.bind(this);
     this.handlePrice=this.handlePrice.bind(this);
@@ -25,11 +24,7 @@ export class AddNewProduct extends Component {
         <input type="text" value={this.state.price} onChange={this.handlePrice}/>
         <br></br>
         <button onClick={this.handleSubmit} className="btn btn-primary">Add new product</button>
-        <Announcement
-          title="Here is your component"
-          subtitle="The best announcement component for React is finally here. Install it in all your projects."
-          link="https://github.com/kristofferandreasen/react-announcement"
-      />
+        
     </div>
       )
   }
@@ -65,8 +60,9 @@ fetch('api/Products', {
   },
   body: JSON.stringify(newProduct)
 })
-                            
-
+    this.setState({name: ""})
+    this.setState({quantityOnStorage: ""})                    
+    this.setState({price: ""})   
 
 }
 

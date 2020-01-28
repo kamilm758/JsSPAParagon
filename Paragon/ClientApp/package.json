@@ -12,6 +12,8 @@
     "react": "^16.0.0",
     "react-announcement": "^1.1.2",
     "react-dom": "^16.0.0",
+    "react-notifications": "^1.4.3",
+    "react-notifications-component": "^2.2.7",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^3.3.0",
