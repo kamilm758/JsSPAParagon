@@ -5,12 +5,13 @@ export class FetchProducts extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { products: [], loading: true };
+    this.state = { products: [], originProducts: [], loading: true };
     this.sortParameter="name";
     this.addNewProduct=this.addNewProduct.bind(this);
     this.sortProducts=this.sortProducts.bind(this);
     this.selectParamSortHandle=this.selectParamSortHandle.bind(this);
     this.compare=this.compare.bind(this);
+    this.searchProductByName=this.searchProductByName.bind(this);
   }
 
   componentDidMount() {
@@ -49,13 +50,15 @@ export class FetchProducts extends Component {
     return (
       <div>
         <button className="btn btn-primary" onClick={this.addNewProduct}>Add new product</button><br></br>
-        <button style={{marginTop="5px"}} className="btn btn-success" onClick={this.sortProducts}>Sort</button>
+        <button style={{marginTop: "5px"}} className="btn btn-success" onClick={this.sortProducts}>Sort</button>
         <label>Sort by:</label>
         <select className="form-control" style={{width: "300px"}} onChange={this.selectParamSortHandle}>
           <option value="name">name</option>
           <option value="quantity">quantity in storage</option>
           <option value="price">price</option>
         </select>
+        <label>Search by name:</label>
+        <input className="form-control" style={{width: "300px"}} type="text" placeholder="enter product name" onChange={this.searchProductByName}/>
         <h1 id="tabelLabel" >All products in storage</h1>
         <p>There you can see all products in storage</p>
         {contents}
@@ -103,9 +106,21 @@ compare( a, b ) {
     return 0;
   }
 
+  searchProductByName(event){
+    let prodNameIncludesSearchPhase =[];
+    for (let i = 0; i < this.state.originProducts.length; i++) {
+        if(this.state.originProducts[i].name.toUpperCase().includes(event.target.value.toUpperCase())){
+          prodNameIncludesSearchPhase.push(this.state.originProducts[i]);
+        }
+    }
+
+    this.setState({products: prodNameIncludesSearchPhase});
+  }
+
  async fetchProductsData() {
     const response = await fetch('api/Products');
     const data =await response.json();
     this.setState({ products: data, loading: false });
+    this.setState({originProducts: data});
   }
 }
