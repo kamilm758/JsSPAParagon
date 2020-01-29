@@ -80,12 +80,30 @@ namespace Paragon.Controllers
         [HttpPost]
         public async Task<ActionResult<Orders>> PostOrders(InformationsAboutOrder orderInformation)
         {
-            var test = orderInformation;
-            int t=2;
+            var allProductsInShop = _context.Products.ToList();
+            Orders order = new Orders
+            {
+                Name = orderInformation.ClientName,
+                Adress = orderInformation.ClientAdress,
+                PostCode = orderInformation.ClientPostCode,
+                OrderDate = DateTime.Now
+            };
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+            foreach(var product in orderInformation.OrderedProducts)
+            {
+                OrderDetails orderDetails = new OrderDetails
+                {
+                    IdOrder = order.Id,
+                    IdProduct = allProductsInShop.Where(p => p.Name == product.Name).ToList()[0].IdProduct,
+                    Count = product.OrderedCount,
+                    Discount = orderInformation.Discount,
+                    UnitPrice = product.Price
+                };
+                _context.OrderDetails.Add(orderDetails);
+            }
 
-           // _context.Orders.Add(orders);
-           // await _context.SaveChangesAsync();
-
+            await _context.SaveChangesAsync();
             return CreatedAtAction("GetOrders",orderInformation);
         }
 
