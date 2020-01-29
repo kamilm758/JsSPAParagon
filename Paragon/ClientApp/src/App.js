@@ -5,6 +5,8 @@ import { Home } from './components/Home';
 import { FetchProducts } from './components/FetchProducts';
 import { Counter } from './components/Counter';
 import {AddNewProduct } from './components/AddNewProduct'
+import {FetchOrders} from './components/FetchOrders'
+import OrderDetails from './components/OrderDetails'
 
 import Modal from './components/Modal'
  
@@ -24,6 +26,11 @@ export default class App extends Component {
       isModalOpen: true,
     })
   }
+  closeModal = () => {
+    this.setState({
+      isModalOpen: false,
+    })
+  }
 
   render () {
     const {isModalOpen} = this.state;
@@ -35,8 +42,11 @@ export default class App extends Component {
         <Route path='/all-products' component={FetchProducts} />
         <Route path='/addNewProduct' component={AddNewProduct}/>
         <Route path='/addNewOrder' component={AddNewOrder}/>
+        <Route path='/all-orders' component={FetchOrders}/>
+        <Route path='/orderDetails' component={OrderDetails}/>
       </Layout>
-      { isModalOpen && <Modal /> }
+      { isModalOpen && <Modal 
+      closeModalFn={this.closeModal } /> }
     </>
     )
   }

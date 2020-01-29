@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from '../style/AddNewProduct.module.scss'
 export class AddNewProduct extends Component {
     static displayName = AddNewProduct.name;
 
@@ -16,12 +17,12 @@ export class AddNewProduct extends Component {
       return(
     <div>
       <p>Add new product to storage</p>
-        <label>Product name</label>
-        <input type="text" value={this.state.name} onChange={this.handleName}/><br></br>
-        <label>Product quantity</label>
-        <input type="number" value={this.state.quantityOnStorage} onChange={this.handleQuantityOnStorage}/><br></br>
-        <label>Product price</label>
-        <input type="text" value={this.state.price} onChange={this.handlePrice}/>
+        <label >Product name</label>
+        <input className={styles.in} type="text" value={this.state.name} onChange={this.handleName}/><br></br>
+        <label >Product quantity</label>
+        <input className={styles.in} type="number" value={this.state.quantityOnStorage} onChange={this.handleQuantityOnStorage}/><br></br>
+        <label >Product price</label>
+        <input className={styles.in} ype="text" value={this.state.price} onChange={this.handlePrice}/>
         <br></br>
         <button onClick={this.handleSubmit} className="btn btn-primary">Add new product</button>
         

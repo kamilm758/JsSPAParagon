@@ -10,4 +10,17 @@
     background-color: white;
     box-shadow: 0 20px 40px -5px rgba(#1e58ff, .3);
     position: fixed;
+    text-align: center;
+  }
+
+  .closeButton {
+    width: 27px;
+    height: 27px;
+    background: #1e58ff;
+    color: white;
+    border: none; 
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    
   }

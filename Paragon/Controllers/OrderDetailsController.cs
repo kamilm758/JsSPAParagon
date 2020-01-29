@@ -30,16 +30,50 @@ namespace Paragon.Controllers
 
         // GET: api/OrderDetails/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<OrderDetails>> GetOrderDetails(int id)
+        public async Task<ActionResult<List<helperModel>>> GetOrderDetails(int id)
         {
-            var orderDetails = await _context.OrderDetails.FindAsync(id);
+            var orderDetails = await _context.OrderDetails.Where(item => item.IdOrder ==id).ToListAsync();
+            if (orderDetails == null)
+            {
+                return NotFound();
+            }
+            var productIds = orderDetails.ToList().Select(t=>t.IdProduct);
+            var orderIds = orderDetails.ToList().Select(t => t.IdOrder);
+            var products = await _context.Products.Where(m => productIds.Contains(m.IdProduct)).ToListAsync();
+            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id ==id);
+
+            List<helperModel> helperModels = new List<helperModel>();
+
+            foreach(OrderDetails x in orderDetails)
+            {
+                var product = products.FirstOrDefault(p => p.IdProduct == x.IdProduct);
+                helperModel model = new helperModel
+                {
+                    IdOrder = order.Id,
+                    IdProduct = product.IdProduct,
+                    Adress = order.Adress,
+                    ClientName = order.Name,
+                    Count = x.Count,
+                    Discount = x.Discount,
+                    IdOrderDetails = x.IdOrderDetails,
+                    OrderDate = order.OrderDate,
+                    PostCode = order.PostCode,
+                    ProductName = product.Name,
+                    UnitPrice = x.UnitPrice
+                };
+                helperModels.Add(model);
+
+               
+            }
+            // var products = await _context.Products
+            //  var products
 
             if (orderDetails == null)
             {
                 return NotFound();
             }
 
-            return orderDetails;
+            return helperModels;
         }
 
         // PUT: api/OrderDetails/5
