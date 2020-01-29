@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -78,12 +78,33 @@ namespace Paragon.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Orders>> PostOrders(Orders orders)
+        public async Task<ActionResult<Orders>> PostOrders(InformationsAboutOrder orderInformation)
         {
-            _context.Orders.Add(orders);
+            var allProductsInShop = _context.Products.ToList();
+            Orders order = new Orders
+            {
+                Name = orderInformation.ClientName,
+                Adress = orderInformation.ClientAdress,
+                PostCode = orderInformation.ClientPostCode,
+                OrderDate = DateTime.Now
+            };
+            _context.Orders.Add(order);
             await _context.SaveChangesAsync();
+            foreach(var product in orderInformation.OrderedProducts)
+            {
+                OrderDetails orderDetails = new OrderDetails
+                {
+                    IdOrder = order.Id,
+                    IdProduct = allProductsInShop.Where(p => p.Name == product.Name).ToList()[0].IdProduct,
+                    Count = product.OrderedCount,
+                    Discount = orderInformation.Discount,
+                    UnitPrice = product.Price
+                };
+                _context.OrderDetails.Add(orderDetails);
+            }
 
-            return CreatedAtAction("GetOrders", new { id = orders.Id }, orders);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction("GetOrders",orderInformation);
         }
 
         // DELETE: api/Orders/5

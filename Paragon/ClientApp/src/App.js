@@ -5,9 +5,11 @@ import { Home } from './components/Home';
 import { FetchProducts } from './components/FetchProducts';
 import { Counter } from './components/Counter';
 import {AddNewProduct } from './components/AddNewProduct'
-import {FetchOrders } from './components/FetchOrders'
+
 import Modal from './components/Modal'
  
+import {AddNewOrder} from './components/AddNewOrder'
+
 import './custom.css'
 
 export default class App extends Component {
@@ -32,7 +34,7 @@ export default class App extends Component {
         <Route path='/counter' component={Counter} />
         <Route path='/all-products' component={FetchProducts} />
         <Route path='/addNewProduct' component={AddNewProduct}/>
-        <Route path='/orders' component={FetchOrders}/> 
+        <Route path='/addNewOrder' component={AddNewOrder}/>
       </Layout>
       { isModalOpen && <Modal /> }
     </>
