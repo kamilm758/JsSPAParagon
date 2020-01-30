@@ -55,12 +55,12 @@ class OrderDetails extends Component {
               <td>{order.count}</td>
               <td>{order.unitPrice}</td>
               <td>{order.discount}</td>
-              <td>{order.unitPrice * order.count * (100-order.discount)/100 }</td>
+              <td>{(order.unitPrice * order.count * (100-order.discount)/100).toFixed(2) }</td>
               <td hidden>{total+=order.unitPrice * order.count * (100-order.discount)/100} </td>
             </tr>
             )}
             <tr>
-                <td></td><td></td><td></td><td></td><td>{total}</td>
+                <td></td><td></td><td></td><td></td><td>{total.toFixed(2)}</td>
             </tr>
         </tbody>
       </table>

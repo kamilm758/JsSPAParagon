@@ -10,7 +10,6 @@
     "eslint": "^6.6.0",
     "jquery": "^3.4.1",
     "merge": "^1.2.1",
-    "node-sass": "^4.13.1",
     "oidc-client": "^1.9.0",
     "react": "^16.0.0",
     "react-announcement": "^1.1.2",
@@ -21,7 +20,8 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "^3.3.0",
     "reactstrap": "^6.3.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "sweetalert2-react": "^0.8.3"
   },
   "devDependencies": {
     "ajv": "^6.9.1",
@@ -31,6 +31,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.11.1",
+    "node-sass": "^4.13.1",
     "typescript": "^3.5.2"
   },
   "eslintConfig": {

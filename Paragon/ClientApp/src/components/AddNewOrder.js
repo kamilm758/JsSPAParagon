@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import TextField from '@material-ui/core/TextField'
+import SweetAlert from 'sweetalert2-react'
 export class AddNewOrder extends Component {
     static displayName = AddNewOrder.name;
 
   constructor(props) {
     super(props);
-    this.state = {orderedProducts:[],products: []};
+    this.state = {orderedProducts:[],products: [], showAlert: false};
     this.name="";
     this.clientName="";
     this.count = "";
@@ -64,6 +65,14 @@ export class AddNewOrder extends Component {
     <input type="text" style={{width: "500px"}} onChange={this.handleClientPostCode} className="form-control" />
     <br></br>
     <button type="button" className="btn btn-primary" onClick={this.addOrder}>Add order</button>
+
+    <SweetAlert
+        show={this.state.showAlert}
+        title="Information"
+        text="Added new order!"
+        onConfirm={() => this.setState({ showAlert: false })}
+      />
+
     </div>
       )
   }
@@ -155,7 +164,7 @@ addOrder(){
         },
         body: JSON.stringify(order)
       })
-    
+    this.setState({showAlert: true});
 }
 
 async fetchProductsData() {

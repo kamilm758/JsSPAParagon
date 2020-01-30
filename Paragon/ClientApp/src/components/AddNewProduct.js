@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from '../style/AddNewProduct.module.scss'
+import { FetchProducts } from './FetchProducts';
 export class AddNewProduct extends Component {
     static displayName = AddNewProduct.name;
 
@@ -63,8 +64,7 @@ fetch('api/Products', {
 })
     this.setState({name: ""})
     this.setState({quantityOnStorage: ""})                    
-    this.setState({price: ""})   
-
+    this.setState({price: ""}) 
 }
 
 }

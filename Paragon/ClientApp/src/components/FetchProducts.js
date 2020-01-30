@@ -30,6 +30,8 @@ export class FetchProducts extends Component {
     this.setState({
       isModalOpen: false,
     })
+    this.fetchProductsData();
+    console.log(this.state.products);
   }
 
     static renderProductsTable(products) {
@@ -49,6 +51,7 @@ export class FetchProducts extends Component {
               <td>{product.name}</td>
               <td>{product.countOnStorage}</td>
               <td>{product.price}</td>
+              
             </tr>
           )}
         </tbody>
