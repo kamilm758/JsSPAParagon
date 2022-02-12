@@ -24,7 +24,7 @@
     "sweetalert2-react": "^0.8.3"
   },
   "devDependencies": {
-    "ajv": "^6.9.1",
+    "ajv": "^6.12.3",
     "cross-env": "^5.2.0",
     "eslint-config-react-app": "^4.0.1",
     "eslint-plugin-flowtype": "^2.0.0",
